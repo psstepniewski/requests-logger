@@ -1,4 +1,4 @@
-name := """logger"""
+name := """requests-logger"""
 organization := "tech.stepniewski"
 
 version := "1.0-SNAPSHOT"

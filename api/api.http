@@ -1,4 +1,4 @@
-POST {{host}}/requests-logger
+POST {{host}}/responses/400?responseBody=NO-OK
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 
 ###
 
-POST {{host}}/requests-logger
+POST {{host}}/responses/202?responseBody=OK
 Content-Type: application/xml
 
 <request>
@@ -21,7 +21,7 @@ Content-Type: application/xml
 
 ###
 
-POST {{host}}/requests-logger
+POST {{host}}/responses/202?responseBody=OK&rejectUntil=2022-12-05T09%3A59%3A00%2B01%3A00
 Content-Type: text/plain
 
 Hello world!
