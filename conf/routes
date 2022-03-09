@@ -4,5 +4,5 @@
 # ~~~~
 
 # An example controller showing a sample home page
-POST     /responses/:httpCode                           controllers.LoggerController.postResponses(httpCode: Int, rejectUntil: Option[String], responseBody: Option[String])
-GET      /responses/:httpCode                           controllers.LoggerController.getResponses(httpCode: Int, rejectUntil: Option[String], responseBody: Option[String])
+POST     /responses/:httpCode                           controllers.LoggerController.postResponses(httpCode: Int, return400Before: Option[String], responseBody: Option[String])
+GET      /responses/:httpCode                           controllers.LoggerController.getResponses(httpCode: Int, return400Before: Option[String], responseBody: Option[String])

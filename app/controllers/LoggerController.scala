@@ -10,8 +10,8 @@ import javax.inject._
 @Singleton
 class LoggerController @Inject()(val controllerComponents: ControllerComponents) extends BaseController with Logging {
 
-  def postResponses(httpCode: Int, rejectBefore: Option[String], responseBody: Option[String]): Action[AnyContent] = logRequest(httpCode, rejectBefore, responseBody)
-  def getResponses(httpCode: Int, rejectBefore: Option[String], responseBody: Option[String]): Action[AnyContent] = logRequest(httpCode, rejectBefore, responseBody)
+  def postResponses(httpCode: Int, return400Before: Option[String], responseBody: Option[String]): Action[AnyContent] = logRequest(httpCode, return400Before, responseBody)
+  def getResponses(httpCode: Int, return400Before: Option[String], responseBody: Option[String]): Action[AnyContent] = logRequest(httpCode, return400Before, responseBody)
 
   private def logRequest(httpCode: Int, rejectBefore: Option[String], responseBody: Option[String]): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
 

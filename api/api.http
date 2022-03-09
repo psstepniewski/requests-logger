@@ -21,7 +21,7 @@ Content-Type: application/xml
 
 ###
 
-POST {{host}}/responses/202?responseBody=OK&rejectUntil=2022-12-05T09%3A59%3A00%2B01%3A00
+POST {{host}}/responses/202?responseBody=OK&return400Before=2022-12-05T09%3A59%3A00%2B01%3A00
 Content-Type: text/plain
 
 Hello world!
