@@ -2,13 +2,13 @@
 <configuration>
 
   <conversionRule conversionWord="coloredLevel" converterClass="play.api.libs.logback.ColoredLevel" />
-  <property name="LOG_HOME" value="${LOGGER_LOGDIR:-./logs}" />
+  <property name="LOG_HOME" value="${REQUESTS-LOGGER_LOGDIR:-./logs}" />
 
   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${LOG_HOME}/logger.log</file>
+    <file>${LOG_HOME}/requests-logger.log</file>
 
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${LOG_HOME}/logger.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+      <fileNamePattern>${LOG_HOME}/requests-logger.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
     </rollingPolicy>
 
     <encoder>
