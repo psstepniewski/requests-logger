@@ -1,5 +1,7 @@
-logs
-target
+logs/*
+target/*
+project/target/*
+project/project/target/*
 /.bsp
 /.idea
 /.idea_modules
@@ -7,7 +9,11 @@ target
 /.project
 /.settings
 
-docker/target
+docker/requests-logger/target/*
+!docker/requests-logger/target/.gitkeep
+docker/requests-logger/ssh-key/*
+!docker/requests-logger/ssh-key/.gitkeep
+
 api/http-client.private.env.json
 
 /RUNNING_PID

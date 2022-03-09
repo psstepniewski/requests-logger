@@ -1,17 +1,35 @@
-FROM adoptopenjdk/openjdk11:centos
-
-ENV REFRESHED_AT 2022-03-09
-
+FROM adoptopenjdk/openjdk11:centos as builder
+ARG APP_VERSION
+ENV CURRENT_VERSION APP_VERSION
+COPY ssh-key/docker-key /root/.ssh/docker-key
+COPY ssh-key/docker-key.pub /root/.ssh/docker-key.pub
 RUN set -eux; \
-    yum -y update; \
-    mv /etc/localtime /etc/localtime.bak && ln -s /usr/share/zoneinfo/Europe/Warsaw /etc/localtime; \
-    yum -y install zip unzip wget curl less nano bind-utils net-tools traceroute iproute lsof psmisc whereis;
+    printf "Host github.com \n  Hostname github.com \n  IdentityFile ~/.ssh/docker-key \n  IdentitiesOnly yes" > /root/.ssh/config; \
+    yum -y install git; \
+    ssh-keyscan github.com >> /root/.ssh/known_hosts; \
+    mkdir /app; \
+    git clone git@github.com:psstepniewski/requests-logger.git app; \
+    yum -y install curl; \
+    curl -L https://www.scala-sbt.org/sbt-rpm.repo > sbt-rpm.repo; \
+    mv sbt-rpm.repo /etc/yum.repos.d/; \
+    yum -y install sbt; \
+    cd app; \
+    git checkout "$APP_VERSION"; \
+    sbt dist
 
+FROM alpine:3.14
+COPY --from=builder /app/target/universal/requests-logger.zip /srv/requests-logger.zip
+WORKDIR /srv
 RUN set -eux; \
-    curl -L https://www.scala-sbt.org/sbt-rpm.repo > sbt-rpm.repo && mv sbt-rpm.repo /etc/yum.repos.d/ && yum -y install sbt; \
-    mkdir app; cd app;
-
-WORKDIR /app
-
-EXPOSE 9000
-CMD ["sbt", "-Dsbt.boot.directory=/.sbt/", "-Dsbt.ivy.home=/.sbt/", "-Divy.home=/.sbt/", "-J-Xms512M", "-J-Xmx1024M", "-J-Xss1M", "clean", "run"]
+    apk update && apk add --no-cache tcpdump nano tzdata && cp /usr/share/zoneinfo/Europe/Warsaw /etc/localtime && echo "Europe/Warsaw" > /etc/timezone && apk del tzdata && adduser --no-create-home --disabled-password --gecos "" --uid 2727 wheelfred wheelfred; \
+    apk add --no-cache openjdk11-jre; \
+    apk add --no-cache bash; \
+    unzip requests-logger.zip; \
+    mv requests-logger app; \
+    rm -rf /srv/requests-logger.zip; \
+    chown -R wheelfred:wheelfred /srv/*
+VOLUME ["/srv/logs"]
+CMD ./app/bin/requests-logger \
+  -Dconfig.file=/srv/app/conf/requests-logger.conf \
+  -Ddb.default.migration.auto=true \
+  -Dhttp.port=13256

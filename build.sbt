@@ -1,5 +1,7 @@
 name := """requests-logger"""
 organization := "tech.stepniewski"
+maintainer := "pawel@stepniewski.tech"
+Universal / packageName := "requests-logger"
 
 version := "1.0-SNAPSHOT"
 
