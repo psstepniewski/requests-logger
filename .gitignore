@@ -6,5 +6,8 @@ target
 /.classpath
 /.project
 /.settings
+
+docker/target
 api/http-client.private.env.json
+
 /RUNNING_PID
