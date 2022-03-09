@@ -1,0 +1,7 @@
+play.http.secret.key="changeMe"
+
+play.filters.hosts {
+  allowed = ["mydomain.pl"]
+}
+
+play.filters.disabled+=play.filters.csrf.CSRFFilter

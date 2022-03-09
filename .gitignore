@@ -15,5 +15,6 @@ docker/requests-logger/ssh-key/*
 !docker/requests-logger/ssh-key/.gitkeep
 
 api/http-client.private.env.json
+conf/requests-logger.conf
 
 /RUNNING_PID
