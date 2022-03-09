@@ -1,0 +1,27 @@
+POST {{host}}/requests-logger
+Content-Type: application/json
+
+{
+  "example-body": "hot",
+  "other-values": ["cold", "excellent!"]
+}
+
+###
+
+POST {{host}}/requests-logger
+Content-Type: application/xml
+
+<request>
+  <example-body>hot</example-body>
+  <other-values elements="2">
+      <other-value>cold</other-value>
+      <other-value>excellent</other-value>
+  </other-values>
+</request>
+
+###
+
+POST {{host}}/requests-logger
+Content-Type: text/plain
+
+Hello world!
