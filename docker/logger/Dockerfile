@@ -1,6 +1,6 @@
 FROM adoptopenjdk/openjdk11:centos
 
-ENV REFRESHED_AT 2021-10-31
+ENV REFRESHED_AT 2022-03-09
 
 RUN set -eux; \
     yum -y update; \
