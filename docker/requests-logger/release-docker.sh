@@ -8,4 +8,4 @@ echo "Saving docker image to tar.gz file..."
 docker save stepniewski.tech/requests-logger:`git describe --tags` | gzip -c > target/requests-logger-`git describe --tags`.tar.gz
 
 echo "Image ready. To copy it to earth paste cmd:"
-echo -e "   \e[92m\e[1m scp docker/target/requests-logger-`git describe --tags`.tar.gz wheely@earth.stepniewski.tech:~ \\e[033;0m"
+echo -e "   \e[92m\e[1m scp docker/requests-logger/target/requests-logger-`git describe --tags`.tar.gz wheely@earth.stepniewski.tech:~ \\e[033;0m"
